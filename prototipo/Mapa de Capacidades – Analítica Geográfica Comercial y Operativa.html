@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mapa de Capacidades – Sistema de Analítica Geográfica Comercial y Operativa</title>
+<style>
+:root{--bg:#f4f6f9;--card:#fff;--tx:#1b2430;--mut:#5c6877;--bd:#cfd6df;--ttl:#2c3e5c;--ttlt:#fff;--n1:#2c3e5c;--n2:#3c6b57;--n3:#34495e;--lt:#fff;--st:#e9f2ff;
+--a1:#2f80d1;--l1:#cfe6fb;--a2:#e08a1e;--l2:#fde3b4;--a3:#7a55c4;--l3:#e3d9f7;--a4:#1a9e86;--l4:#c3f1e7;--a5:#d9534a;--l5:#fbd5d0;--a6:#4f63c9;--l6:#d6dcf7;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12161c;--card:#1a2029;--tx:#e8ecf1;--mut:#9aa6b4;--bd:#2c3542;--ttl:#2c3e5c;--st:#1b2a3d;--n2:#2f5646;
+--a1:#5aa8f0;--l1:#1b3550;--a2:#f0a84a;--l2:#4a3418;--a3:#a58be0;--l3:#34294f;--a4:#3cc9ae;--l4:#174037;--a5:#f0847c;--l5:#4d2522;--a6:#8a9bec;--l6:#262d55;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12161c;--card:#1a2029;--tx:#e8ecf1;--mut:#9aa6b4;--bd:#2c3542;--ttl:#2c3e5c;--st:#1b2a3d;--n2:#2f5646;
+--a1:#5aa8f0;--l1:#1b3550;--a2:#f0a84a;--l2:#4a3418;--a3:#a58be0;--l3:#34294f;--a4:#3cc9ae;--l4:#174037;--a5:#f0847c;--l5:#4d2522;--a6:#8a9bec;--l6:#262d55;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px}
+.sc{overflow-x:auto}
+.wrap{min-width:1150px;max-width:1500px;margin:0 auto;display:grid;grid-template-columns:140px 1fr;gap:12px}
+.title{grid-column:1/3;background:var(--ttl);color:var(--ttlt);border-radius:10px;padding:12px;text-align:center;font-size:1.3rem}
+.title b{font-weight:800}
+.lab{border-radius:10px;color:#fff;padding:12px;font-size:.8rem}
+.lab h2{margin:0 0 4px;font-size:1.05rem}
+.lab p{margin:6px 0 0;opacity:.85}
+.lab.a{background:var(--n1)}.lab.b{background:var(--n2)}.lab.c{background:var(--n3)}
+.st{background:var(--st);border:1.5px solid var(--a1);border-radius:10px;padding:16px 24px;text-align:center;font-weight:700;font-size:1.02rem;display:flex;align-items:center;justify-content:center}
+.row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.col{display:flex;flex-direction:column;gap:12px}
+.h2c{background:var(--l);border:1.5px solid var(--a);border-radius:10px;padding:12px 8px;text-align:center;font-weight:800;font-size:1rem}
+.ic{width:48px;height:48px;border-radius:50%;background:var(--a);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.cd{background:var(--card);border:1.5px solid var(--a);border-radius:9px;overflow:hidden}
+.cd h3{margin:0;background:var(--l);padding:7px 10px;font-size:.84rem}
+.cd ul{margin:0;padding:8px 10px 8px 26px;font-size:.78rem}
+.cd li{margin-bottom:3px}
+.n3{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+</style>
+</head>
+<body>
+<div class="sc"><div class="wrap">
+<div class="title"><b>Mapa de Capacidades</b> – Sistema de Analítica Geográfica Comercial y Operativa</div>
+<div class="lab a"><h2>Nivel 1</h2><b>Capacidades Estratégicas</b><p>(¿Qué hace el negocio?)</p></div>
+<div class="st">Potenciar la toma de decisiones estratégicas y operativas mediante el análisis geográfico y comercial de la información de Odoo y otras fuentes, para visualizar la cobertura, identificar oportunidades de expansión y comprender el posicionamiento frente a la competencia.</div>
+<div class="lab b"><h2>Nivel 2</h2><b>Capacidades de Negocio</b><p>(Agrupación funcional)</p></div>
+<div class="row" id="r2"></div>
+<div class="lab c"><h2>Nivel 3</h2><b>Capacidades Operativas / Específicas</b><p>(Habilidades concretas que soporta el sistema)</p></div>
+<div class="row" id="r3"></div>
+</div></div>
+<script>
+var C=[
+["📍","Inteligencia Comercial Territorial",[
+["1.1 Gestión de Cobertura Comercial",["Georreferenciar clientes y distribuidores","Visualizar la cobertura comercial propia","Identificar zonas sin atención","Ver clientes atendidos por zona"]],
+["1.2 Análisis de Concentración",["Mapas de calor de clientes","Mapas de calor de distribuidores","Mapas de calor de competidores","Identificar zonas de alta concentración"]],
+["1.3 Análisis Competitivo",["Registrar y georreferenciar competidores","Comparar presencia propia vs. competencia","Identificar zonas en disputa","Detectar oportunidades de expansión"]]]],
+["🗺️","Analítica Geoespacial",[
+["2.1 Visualización Geográfica",["Mapas interactivos","Capas activables","Mapas de calor","Agrupamiento de puntos (clusters)"]],
+["2.2 Análisis Espacial",["Densidad territorial","Identificación de zonas de baja cobertura","Áreas de influencia por distribuidor","Cruce de ubicación con variables comerciales"]],
+["2.3 Exploración de Datos",["Navegación dinámica por el mapa","Zoom y detalle territorial","Consulta por ubicación","Información al seleccionar un punto"]]]],
+["📊","Gestión de Información Comercial",[
+["3.1 Análisis de Ventas",["Ventas por territorio","Ventas por producto","Ventas por período","Ranking geográfico de ventas"]],
+["3.2 Análisis de Clientes",["Clientes por tipo y territorio","Consumo por zona","Concentración de clientes","Productos más consumidos por zona"]],
+["3.3 Análisis de Distribuidores",["Distribuidores por territorio","Cobertura por distribuidor","Ventas por distribuidor","Zonas atendidas por distribuidor"]]]],
+["🗄️","Integración y Calidad de Datos",[
+["4.1 Integración con Odoo",["Consumir clientes, distribuidores, ventas y productos","Usar Odoo como fuente principal","Sincronización controlada o en tiempo real","Evitar la duplicación de datos"]],
+["4.2 Gestión de Datos Geográficos",["Geocodificar direcciones","Asociar provincia, cantón y zona","Cargar límites territoriales","Incorporar datos de competidores"]],
+["4.3 Calidad de Datos",["Detectar direcciones sin ubicar","Validar ubicaciones","Mantener los datos actualizados","Conservar la integridad de la información"]]]],
+["🎯","Soporte a la Toma de Decisiones",[
+["5.1 Indicadores Geográficos",["Indicadores de cobertura","Indicadores de concentración","Indicadores de ventas por zona","Comparativo entre zonas"]],
+["5.2 Planeación de Expansión",["Zonas con baja cobertura propia","Zonas con poca competencia","Zonas con clientes sin distribuidor","Priorización de zonas de crecimiento"]],
+["5.3 Posicionamiento frente a la Competencia",["Posicionamiento territorial propio","Presencia competitiva por zona","Brechas de cobertura","Comparación propia vs. competencia"]]]],
+["👥","Experiencia del Usuario",[
+["6.1 Filtros Dinámicos",["Por provincia y cantón","Por zona","Por producto y distribuidor","Por período y tipo de cliente"]],
+["6.2 Visualización Ejecutiva",["Tableros interactivos","Mapas claros para usuarios no técnicos","Resúmenes por zona","Apoyo a decisiones estratégicas y operativas"]],
+["6.3 Perfiles de Usuario",["Vista para gerencia","Vista para jefaturas comerciales","Consulta ágil sin conocimientos técnicos","Acceso según el rol"]]]]
+];
+var a="",b="";
+C.forEach(function(c,i){
+var k=i+1,s='style="--a:var(--a'+k+');--l:var(--l'+k+')"';
+a+='<div class="h2c" '+s+'><div class="ic">'+c[0]+'</div>'+c[1]+'</div>';
+b+='<div class="col" '+s+'>'+c[2].map(function(m){return '<div class="cd"><h3>'+m[0]+'</h3><ul>'+m[1].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>'}).join('')+'</div>';
+});
+document.getElementById("r2").innerHTML=a;
+document.getElementById("r3").innerHTML=b;
+</script>
+</body>
+</html>
